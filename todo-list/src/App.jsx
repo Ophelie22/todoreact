@@ -29,13 +29,49 @@ function App() {
   function deleteTodo(id) {
     setTodoList(todoList.filter((todo) => todo.id !== id));
   }
+  //pour le mode edition 
+  //Quand la propriété edit d'une tâche
+  // vaut true nous voulons afficher le formulaire d'édition de cette tâche et quand elle vaut false, nous voulons afficher la tâche.
+  //Nous devons donc ajouter cette mécanique pour déclencher le mode édition.
+
+
+// Cette fonction prend en paramètre un 'id' qui correspond
+//à l'identifiant d'une tâche dans la liste de tâches (todoList).
+function toggleTodo(id) {
+  // 'setTodoList' est  une fonction d'état (state setter) provenant de React,
+    // qui met à jour la liste de tâches (todoList) avec une nouvelle version modifiée.
+    setTodoList(
+      todoList.map((todo) =>
+        /// 'todoList.map' crée un nouveau tableau en appliquant la fonction donnée à chaque élément (todo) de la liste de tâches actuelle.
+      // Cela permet de retourner une nouvelle version de chaque élément selon une condition.
+        todo.id === id ? { ...todo, done: !todo.done } : todo
+      // Si l'identifiant de la tâche actuelle (todo.id) est égal à l'identifiant donné (id),
+      // alors l'opérateur ternaire retourne un nouvel objet tâche (todo) avec toutes ses propriétés d'origine (...todo),
+      // sauf que la propriété 'done' est inversée (!todo.done).
+      // Sinon, il retourne simplement la tâche telle qu'elle est sans modification.
+      )
+        // Le tableau retourné par 'map' est passé à 'setTodoList', ce qui met à jour l'état de la liste de tâches.
+    );
+  }
+  function toggleTodoEdit(id) {
+    setTodoList(
+      todoList.map((todo) =>
+        todo.id === id ? { ...todo, edit: !todo.edit } : todo
+      )
+    );
+  }
+
 
   return (
     <div className="d-flex justify-content-center align-items-center p-20">
       <div className="card container p-20">
         <h1 className="mb-20">Liste de tâches</h1>
         <AddTodo addTodo={addTodo} />
-        <TodoList todoList={todoList} deleteTodo={deleteTodo} />
+        <TodoList 
+          todoList={todoList} 
+          deleteTodo={deleteTodo}
+          toggleTodo={toggleTodo}
+          toggleTodoEdit={toggleTodoEdit} />
       </div>
     </div>
   );
