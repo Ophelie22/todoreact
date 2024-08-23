@@ -18,7 +18,13 @@ function App() {
   // totale de modifier une prop directement, c'est pour cela qu'en React nous passons des fonctions 
   //pour que les composants enfants puissent demander la modification de l'état. 
   function addTodo(content) {
-    const todo = { id: crypto.randomUUID(), done: false, edit: false, content };
+    const todo = { 
+      id: crypto.randomUUID(),
+      done: false,
+      edit: false,
+      select: false,
+      content
+    };
     //console.log(todo);
     setTodoList([...todoList, todo]);
   }
@@ -68,7 +74,15 @@ function toggleTodo(id) {
       )
     );
   }
-
+  function selectTodo(id) {
+    setTodoList(
+      todoList.map((todo) =>
+        todo.id === id
+          ? { ...todo, selected: !todo.selected }
+          : { ...todo, selected: false }
+      )
+    );
+  }
 
   return (
     <div className="d-flex justify-content-center align-items-center p-20">
@@ -81,6 +95,7 @@ function toggleTodo(id) {
           toggleTodo={toggleTodo}
           toggleTodoEdit={toggleTodoEdit}
           editTodo={editTodo}
+          selectTodo={selectTodo}
         />
       </div>
     </div>
