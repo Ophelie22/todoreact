@@ -1,0 +1,54 @@
+@mixin xs {
+
+    //etra small
+    @media (max-width: 5776x) {
+        @content;
+    }
+}
+@mixin sm {
+    //smalll
+    @media (min-width: 577px) and (max-width: 768px) {
+        @content;
+    }
+}
+
+//tout ce qui va etre  etre  plus petit ajout d'une regle que small
+@mixin sm-lt {
+    @media (max-width: 768px) {
+        @content;
+    }
+}
+
+//medium
+@mixin md {
+
+    @media (min-width: 769px) and (max-width: 992px) {
+        @content;
+    }
+}
+
+@mixin md-lt {
+    @media (max-width: 992px) {
+        @content;
+    }
+}
+
+@mixin lg {
+    //large
+    @media (min-width: 993px) and (max-width: 1200px) {
+        @content;
+    }
+}
+@mixin lg-lt {
+    @media (max-width: 1200px) {
+        @content;
+    }
+}
+
+@mixin xl {
+    //extra large
+    
+    @media (min-width: 1201px) {
+        @content;
+    }
+}
