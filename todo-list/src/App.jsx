@@ -19,7 +19,7 @@ function App() {
   //pour que les composants enfants puissent demander la modification de l'état. 
   function addTodo(content) {
     const todo = { id: crypto.randomUUID(), done: false, edit: false, content };
-    console.log(todo);
+    //console.log(todo);
     setTodoList([...todoList, todo]);
   }
   //ajout de ma fonction delete
@@ -29,14 +29,14 @@ function App() {
   function deleteTodo(id) {
     setTodoList(todoList.filter((todo) => todo.id !== id));
   }
-  //pour le mode edition 
+
+
+  //Pour le mode edition 
   //Quand la propriété edit d'une tâche
   // vaut true nous voulons afficher le formulaire d'édition de cette tâche et quand elle vaut false, nous voulons afficher la tâche.
   //Nous devons donc ajouter cette mécanique pour déclencher le mode édition.
-
-
-// Cette fonction prend en paramètre un 'id' qui correspond
-//à l'identifiant d'une tâche dans la liste de tâches (todoList).
+  // Cette fonction prend en paramètre un 'id' qui correspond
+  //à l'identifiant d'une tâche dans la liste de tâches (todoList).
 function toggleTodo(id) {
   // 'setTodoList' est  une fonction d'état (state setter) provenant de React,
     // qui met à jour la liste de tâches (todoList) avec une nouvelle version modifiée.
@@ -53,10 +53,18 @@ function toggleTodo(id) {
         // Le tableau retourné par 'map' est passé à 'setTodoList', ce qui met à jour l'état de la liste de tâches.
     );
   }
+  //voir commentaire au dessus car j'ai pas l'habitudes de cette syntaxe
   function toggleTodoEdit(id) {
     setTodoList(
       todoList.map((todo) =>
         todo.id === id ? { ...todo, edit: !todo.edit } : todo
+      )
+    );
+  }
+  function editTodo(id, content) {
+    setTodoList(
+      todoList.map((todo) =>
+        todo.id === id ? { ...todo, edit: false, content } : todo
       )
     );
   }
@@ -71,7 +79,9 @@ function toggleTodo(id) {
           todoList={todoList} 
           deleteTodo={deleteTodo}
           toggleTodo={toggleTodo}
-          toggleTodoEdit={toggleTodoEdit} />
+          toggleTodoEdit={toggleTodoEdit}
+          editTodo={editTodo}
+        />
       </div>
     </div>
   );

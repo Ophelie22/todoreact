@@ -7,17 +7,29 @@ import EditTodo from './EditTodo';
 // la fonction de suppression liée à la valeur de l'identifiant unique de la tâche.
 
 
-export default function TodoList({ todoList, deleteTodo, toggleTodo,toggleTodoEdit, }) {
+export default function TodoList({ 
+    todoList,
+    deleteTodo,
+    toggleTodo,
+    toggleTodoEdit,
+    editTodo
+}) {
     return todoList.length ? (
         <ul>
-        {todoList.map((todo) => todo.edit ? (
-          <EditTodo key={todo.id} todo={todo} />
+        {todoList.map((todo) =>
+            todo.edit ? (
+            <EditTodo
+                key={todo.id}
+                todo={todo} 
+                editTodo={(content) => editTodo(todo.id, content)}
+                cancelEditTodo={() => toggleTodoEdit(todo.id)}
+                />
         ) : (
             <TodoItem
                 key={todo.id}
                 todo={todo}
                 deleteTodo={() => deleteTodo(todo.id)}
-                toggleTodo={() => toggleTodo(todo.id)}
+                toggleTodo={() => toggleTodo(todo.id)}               
                 editTodo={() => toggleTodoEdit(todo.id)}
             />
             )
