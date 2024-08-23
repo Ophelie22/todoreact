@@ -22,13 +22,20 @@ function App() {
     console.log(todo);
     setTodoList([...todoList, todo]);
   }
+  //ajout de ma fonction delete
+  // utilise la méthode filter() qui retourne un nouveau tableau sans modifier le tableau dans la variable d'état todoList.
+  // Nous respectons donc bien la règle de ne pas modifier directement l'état !
+  //Nous passons la fonction de suppression à notre composant TodoList en prop.
+  function deleteTodo(id) {
+    setTodoList(todoList.filter((todo) => todo.id !== id));
+  }
 
   return (
     <div className="d-flex justify-content-center align-items-center p-20">
       <div className="card container p-20">
         <h1 className="mb-20">Liste de tâches</h1>
         <AddTodo addTodo={addTodo} />
-        <TodoList />
+        <TodoList todoList={todoList} deleteTodo={deleteTodo} />
       </div>
     </div>
   );
